@@ -3,36 +3,41 @@ import json
 from typing import List
 import tempfile
 import uuid
-
 import requests
 from dotenv import load_dotenv, find_dotenv
+
 load_dotenv(find_dotenv())
 
+# Define the output directory for saving audio files
 OUTPUT_DIR = os.path.join(
     tempfile.gettempdir(),
     'openai_telegram',
     'audios'
 )
 
+# Create the output directory if it doesn't exist
 os.makedirs(
     OUTPUT_DIR,
     exist_ok=True
 )
 
+# Get the Telegram bot token from environment variables
 TOKEN = os.getenv('TOKEN')
+
+# Construct the base URL for Telegram API requests
 BASE_URL = f'https://api.telegram.org/bot{TOKEN}'
 
 
 def send_message(chat_id: int, message: str) -> bool:
     '''
-    Send message to a Telegram user.
+    Send a text message to a Telegram user.
 
     Parameters:
         - chat_id(int): chat id of the user
         - message(str): text message to send
 
     Returns:
-        - bool: either 0 for error or 1 for success 
+        - bool: True for success, False for error 
     '''
 
     payload = {
@@ -59,9 +64,10 @@ def send_photo(chat_id: int, url: str, caption: str = '') -> bool:
     Parameters:
         - chat_id(int): chat id of the user
         - url(str): photo url
+        - caption(str)(optional): caption for the photo
 
     Returns:
-        - bool: either 0 for error or 1 for success 
+        - bool: True for success, False for error 
     '''
 
     payload = {
@@ -87,14 +93,14 @@ def send_photo(chat_id: int, url: str, caption: str = '') -> bool:
 
 def set_webhook(url: str, secret_token: str = '') -> bool:
     '''
-    Set a url as a webhook to receive all incoming messages
+    Set a URL as a webhook to receive all incoming messages.
 
     Parameters:
-        - url(str): url as a webhook
-        - secret_token(str)(Optional): you will receive this secret token from Telegram request as X-Telegram-Bot-Api-Secret-Token
+        - url(str): URL as a webhook
+        - secret_token(str)(optional): secret token received from Telegram request as X-Telegram-Bot-Api-Secret-Token
 
     Returns:
-        - bool: either 0 for error or 1 for success
+        - bool: True for success, False for error
     '''
 
     payload = {'url': url}
@@ -106,7 +112,6 @@ def set_webhook(url: str, secret_token: str = '') -> bool:
 
     response = requests.request(
         'POST', f'{BASE_URL}/setWebhook', json=payload, headers=headers)
-    print(response.text)
     status_code = response.status_code
     response = json.loads(response.text)
 
@@ -118,14 +123,14 @@ def set_webhook(url: str, secret_token: str = '') -> bool:
 
 def set_menu_commands(commands: List[dict]) -> bool:
     '''
-    Set a menu commands in the Telegram bot
+    Set menu commands in the Telegram bot.
 
     Parameters:
-        - commands(List[dict]): commands is a list of objects, each object must have two properties command and description
-        where command is postback to Telegram, while description explains the command to the user
+        - commands(List[dict]): a list of objects, each object must have two properties: 'command' and 'description'.
+          'command' is the postback to Telegram, while 'description' explains the command to the user.
 
     Returns:
-        - bool: either 0 for error or 1 for success
+        - bool: True for success, False for error
     '''
 
     payload = {'commands': commands}
@@ -145,13 +150,13 @@ def set_menu_commands(commands: List[dict]) -> bool:
 
 def get_file_path(file_id: str) -> dict:
     '''
-    Get the file path from the file id of the attachement
+    Get the file path from the file id of the attachment.
 
     Parameters:
-        - file_id(str): file id of the attachement
+        - file_id(str): file id of the attachment
 
     Returns:
-        - dict of status and file path of the attachment
+        - dict: dictionary containing the status and file path of the attachment
     '''
 
     url = f'https://api.telegram.org/bot{TOKEN}/getFile'
@@ -175,20 +180,20 @@ def get_file_path(file_id: str) -> dict:
 
 def save_file_and_get_local_path(file_path: str) -> dict:
     '''
-    Save the file and get the local file path
+    Save the file and get the local file path.
 
     Parameters:
         - file_path(str): file path of the attachment
 
     Returns:
-        - dict of status and the local file path of the attchment
+        - dict: dictionary containing the status and the local file path of the attachment
     '''
 
     url = f'https://api.telegram.org/file/bot{TOKEN}/{file_path}'
     response = requests.request('GET', url)
-    extention = file_path.split('.')[-1]
+    extension = file_path.split('.')[-1]
     file_id = uuid.uuid1()
-    file_name = f'{file_id}.{extention}'
+    file_name = f'{file_id}.{extension}'
     local_file_path = os.path.join(
         OUTPUT_DIR,
         file_name
@@ -203,7 +208,7 @@ def save_file_and_get_local_path(file_path: str) -> dict:
             'local_file_path': local_file_path,
             'file_name': file_name,
             'file_id': file_id,
-            'extension': extention
+            'extension': extension
         }
     else:
         return {
@@ -222,6 +227,7 @@ def send_audio(chat_id: int, url: str, caption: str = '') -> bool:
     Parameters:
         - chat_id(int): chat id of the user
         - url(str): audio file url
+        - caption(str)(optional): caption for the audio file
 
     Returns:
         - bool: True for success, False for error 
