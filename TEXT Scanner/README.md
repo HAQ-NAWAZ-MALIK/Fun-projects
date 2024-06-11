@@ -6,11 +6,8 @@ This is a simple project that converts an image to text. It uses the tesseract.j
 
 ### https://sauravhathi.github.io/imageToText/
 
-![image](https://user-images.githubusercontent.com/61316762/203771705-998822b9-9689-45ba-8518-6cfbec9e7f78.png)
+![image](https://github.com/HAQ-NAWAZ-MALIK/Fun-projects/assets/86514900/3e249d26-49f7-4540-9240-8f7f5d9b4b12)
 
-![image](https://user-images.githubusercontent.com/61316762/203771710-b0478a06-d20f-43c9-9a51-e70093ffcc07.png)
-
-![image](https://user-images.githubusercontent.com/61316762/203771726-39894358-f44e-4b33-b7c1-778d66f3f787.png)
 
 ## How to use
 
