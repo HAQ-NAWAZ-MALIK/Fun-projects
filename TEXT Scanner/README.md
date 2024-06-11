@@ -4,7 +4,7 @@ This is a simple project that converts an image to text. It uses the tesseract.j
 
 ## Demo
 
-### https://sauravhathi.github.io/imageToText/
+### https://image-to-text-omar.netlify.app/
 
 ![image](https://github.com/HAQ-NAWAZ-MALIK/Fun-projects/assets/86514900/3e249d26-49f7-4540-9240-8f7f5d9b4b12)
 
@@ -25,8 +25,7 @@ This is a simple project that converts an image to text. It uses the tesseract.j
 
 ## Author
 
-- [Saurav Hathi](https://github.com/sauravhathi)
+- [HAQ NAWAZ MALIK](https://github.com/HAQ-NAWAZ-MALIK)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/sauravhathi/imageToText/blob/master/LICENSE) file for details .
+
