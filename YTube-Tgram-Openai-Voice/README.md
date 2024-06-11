@@ -11,13 +11,29 @@ This project is a Telegram bot that utilizes the OpenAI API to provide natural l
 - Audio responses: The bot can generate audio responses using the OpenAI text-to-speech model, which can be sent back to the user as audio files.
 
 
+3. Set up environment variables:
 
+- `OPENAI_API_KEY`: Your OpenAI API key.
+- `TOKEN`: Your Telegram bot token.
+- `CREDENTIALS`: Your Google Cloud Platform credentials (JSON format).
+- `GCP_CLOUD_STORAGE_BUCKET_NAME`: The name of your Google Cloud Storage bucket.
+
+4. Run the application:
 
 #### Steps
 * create a .env file in the root directory
 * create GCP account, and get the service account credentials, then create a Cloud Storage Buckate, and **make it public**.
 * in the .env file replace the CREDENTIALS with your service account file value
 * replace the GCP_CLOUD_STORAGE_BUCKET_NAME with your bucket name
+
+5. Set up the Telegram webhook by sending a POST request to `/set-telegram-webhook` with the following payload:
+
+```json
+{
+  "url": "https://your-server.com/telegram",
+  "secret_token": "your-secret-token"
+}
+
 
 #### Run the code
 * for server
