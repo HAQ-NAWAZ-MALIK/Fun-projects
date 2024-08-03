@@ -1,8 +1,4 @@
 
-
-
-
-```markdown
 # Internet Speed and CPU Usage Monitor
 
 This Python script measures your internet download and upload speeds, as well as your current CPU usage.
@@ -52,7 +48,6 @@ Internet speed tests may take a few moments to complete. The accuracy of the spe
 
 ## License
 
-[Specify the license here, e.g., MIT, GPL, etc.]
+[MIT]
 ```
 
-Would you like me to explain or elaborate on any part of this README?
